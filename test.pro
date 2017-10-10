@@ -3,5 +3,5 @@ QT += gui
 QT += network
 
 HEADERS       = Currency.h Utils.h
-SOURCES       = main.cpp
+SOURCES       = Currency.cpp main.cpp
 
