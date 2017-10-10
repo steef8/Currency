@@ -6,6 +6,7 @@
 #include <QtNetwork/QNetworkRequest>
 #include <QtNetwork/QNetworkReply>
 #include <QTime>
+#include <QEventLoop>
 
 namespace Utils {
   
