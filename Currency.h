@@ -5,26 +5,31 @@
 #include <iostream>
 
 
-/**
- *
+/*
+ * Class Currency used to monitor bitcoin/euro exchange
  */
 class Currency
 {
   
 public:
-  /**/
+  
   Currency(QUrl const url){
     this->c_url = url;
   };
   
-  /**/
-  inline double getValue(QString const str){
-    computeValue(str);
+  /**
+   * @brief Compute and return currency value
+   */
+  inline double getValue(QString const keyword){
+    computeValue(keyword);
     return c_value;
   };
   
-  /**/
-  inline void computeValue(QString const str){
+  /**
+   * @brief Compute currency value
+   * @param str: Keyword used to retrieve the currency value (could be "high", "last", ...)
+   */
+  inline void computeValue(QString const keyword){
     
     QString content = Utils::getURLContent(c_url);
     
@@ -33,7 +38,7 @@ public:
     
     try {
       for(auto l : list){
-        if(l.contains(str)){
+        if(l.contains(keyword)){
           val = Utils::extractDouble(l);
           break;
         }
@@ -46,12 +51,17 @@ public:
     this->c_value = val;
   }
   
-  /**/
+  /**
+   * @brief Update the url
+   */
   inline void update(QUrl qurl){
     this->c_url = qurl;
   }
   
-  /**/
+  /**
+   * @brief Get a Qstring with the current currency exchange
+   *        and the time
+   */
   inline QString getString(QString const keyword){
     
     double curr = getValue(keyword);
@@ -64,10 +74,10 @@ public:
   
   
 private:
-  /**/
-  double c_value;
-  /**/
-  QUrl c_url;
+  
+  double c_value; // currency value
+  
+  QUrl c_url; // url to download currency value
 };
 
 
